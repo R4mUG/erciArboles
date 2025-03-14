@@ -1,0 +1,82 @@
+<html>
+<head>
+<title>consultasPage.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+consultasPage.py</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">flet </span><span class="s0">as </span><span class="s1">ft</span>
+<span class="s0">import </span><span class="s1">ddbb</span>
+
+<span class="s0">def </span><span class="s1">main</span><span class="s2">(</span><span class="s1">page</span><span class="s2">: </span><span class="s1">ft</span><span class="s2">.</span><span class="s1">Page</span><span class="s2">):</span>
+    <span class="s1">page</span><span class="s2">.</span><span class="s1">title </span><span class="s2">= </span><span class="s3">&quot;Consultas&quot;</span>
+
+    <span class="s4"># Consultar y cargar todos los arboles</span>
+    <span class="s0">def </span><span class="s1">consultar_arboles</span><span class="s2">():</span>
+        <span class="s1">arboles </span><span class="s2">= </span><span class="s1">ddbb</span><span class="s2">.</span><span class="s1">consultar_arboles</span><span class="s2">() </span><span class="s4"># Esto son los datos</span>
+        <span class="s1">cargar_tabla</span><span class="s2">(</span><span class="s1">arboles</span><span class="s2">)</span>
+        <span class="s1">page</span><span class="s2">.</span><span class="s1">update</span><span class="s2">()</span>
+
+
+    <span class="s4"># Datos es la lista de arboles</span>
+    <span class="s0">def </span><span class="s1">cargar_tabla</span><span class="s2">(</span><span class="s1">datos</span><span class="s2">):</span>
+        <span class="s1">tabla</span><span class="s2">.</span><span class="s1">rows </span><span class="s2">= []</span>
+        <span class="s0">for </span><span class="s1">fila </span><span class="s0">in </span><span class="s1">datos</span><span class="s2">:</span>
+            <span class="s1">tabla</span><span class="s2">.</span><span class="s1">rows</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s1">ft</span><span class="s2">.</span><span class="s1">DataRow</span><span class="s2">(</span><span class="s1">cells</span><span class="s2">=[</span>
+                <span class="s1">ft</span><span class="s2">.</span><span class="s1">DataCell</span><span class="s2">(</span><span class="s1">ft</span><span class="s2">.</span><span class="s1">Text</span><span class="s2">(</span><span class="s1">str</span><span class="s2">(</span><span class="s1">fila</span><span class="s2">[</span><span class="s5">0</span><span class="s2">]))), </span><span class="s4">#ID</span>
+                <span class="s1">ft</span><span class="s2">.</span><span class="s1">DataCell</span><span class="s2">(</span><span class="s1">ft</span><span class="s2">.</span><span class="s1">Text</span><span class="s2">((</span><span class="s1">fila</span><span class="s2">[</span><span class="s5">1</span><span class="s2">]))), </span><span class="s4">#Nombre</span>
+                <span class="s1">ft</span><span class="s2">.</span><span class="s1">DataCell</span><span class="s2">(</span><span class="s1">ft</span><span class="s2">.</span><span class="s1">Text</span><span class="s2">((</span><span class="s1">fila</span><span class="s2">[</span><span class="s5">2</span><span class="s2">]))), </span><span class="s4">#Tipo</span>
+                <span class="s1">ft</span><span class="s2">.</span><span class="s1">DataCell</span><span class="s2">(</span><span class="s1">ft</span><span class="s2">.</span><span class="s1">Text</span><span class="s2">(</span><span class="s1">str</span><span class="s2">(</span><span class="s1">fila</span><span class="s2">[</span><span class="s5">3</span><span class="s2">]))), </span><span class="s4">#Altura</span>
+                <span class="s1">ft</span><span class="s2">.</span><span class="s1">DataCell</span><span class="s2">(</span><span class="s1">ft</span><span class="s2">.</span><span class="s1">Text</span><span class="s2">(</span><span class="s1">str</span><span class="s2">(</span><span class="s1">fila</span><span class="s2">[</span><span class="s5">4</span><span class="s2">]))), </span><span class="s4">#Fecha</span>
+            <span class="s2">]))</span>
+
+    <span class="s0">def </span><span class="s1">buscar_arboles</span><span class="s2">(</span><span class="s1">e</span><span class="s2">):</span>
+        <span class="s1">lista_arboles </span><span class="s2">= </span><span class="s1">ddbb</span><span class="s2">.</span><span class="s1">consultar_arboles_por_nombre</span><span class="s2">(</span><span class="s1">nombre_tf</span><span class="s2">.</span><span class="s1">value</span><span class="s2">)</span>
+        <span class="s1">cargar_tabla</span><span class="s2">(</span><span class="s1">lista_arboles</span><span class="s2">)</span>
+        <span class="s1">page</span><span class="s2">.</span><span class="s1">update</span><span class="s2">()</span>
+
+    <span class="s4">#OBJETOS</span>
+    <span class="s1">nombre_tf </span><span class="s2">= </span><span class="s1">ft</span><span class="s2">.</span><span class="s1">TextField</span><span class="s2">(</span><span class="s1">label</span><span class="s2">=</span><span class="s3">&quot;Nombre&quot;</span><span class="s2">, </span><span class="s1">width</span><span class="s2">=</span><span class="s5">300</span><span class="s2">)</span>
+    <span class="s1">buscar_btn </span><span class="s2">= </span><span class="s1">ft</span><span class="s2">.</span><span class="s1">ElevatedButton</span><span class="s2">(</span><span class="s3">&quot;Buscar&quot;</span><span class="s2">, </span><span class="s1">width</span><span class="s2">=</span><span class="s5">300</span><span class="s2">, </span><span class="s1">on_click</span><span class="s2">=</span><span class="s1">buscar_arboles</span><span class="s2">)</span>
+    <span class="s1">tabla </span><span class="s2">= </span><span class="s1">ft</span><span class="s2">.</span><span class="s1">DataTable</span><span class="s2">(</span><span class="s1">bgcolor</span><span class="s2">=</span><span class="s3">&quot;yellow&quot;</span><span class="s2">,</span>
+        <span class="s1">columns</span><span class="s2">=[</span>
+            <span class="s1">ft</span><span class="s2">.</span><span class="s1">DataColumn</span><span class="s2">(</span><span class="s1">ft</span><span class="s2">.</span><span class="s1">Text</span><span class="s2">(</span><span class="s3">&quot;ID&quot;</span><span class="s2">)),</span>
+            <span class="s1">ft</span><span class="s2">.</span><span class="s1">DataColumn</span><span class="s2">(</span><span class="s1">ft</span><span class="s2">.</span><span class="s1">Text</span><span class="s2">(</span><span class="s3">&quot;Nombre&quot;</span><span class="s2">)),</span>
+            <span class="s1">ft</span><span class="s2">.</span><span class="s1">DataColumn</span><span class="s2">(</span><span class="s1">ft</span><span class="s2">.</span><span class="s1">Text</span><span class="s2">(</span><span class="s3">&quot;Tipo&quot;</span><span class="s2">)),</span>
+            <span class="s1">ft</span><span class="s2">.</span><span class="s1">DataColumn</span><span class="s2">(</span><span class="s1">ft</span><span class="s2">.</span><span class="s1">Text</span><span class="s2">(</span><span class="s3">&quot;Altura&quot;</span><span class="s2">)),</span>
+            <span class="s1">ft</span><span class="s2">.</span><span class="s1">DataColumn</span><span class="s2">(</span><span class="s1">ft</span><span class="s2">.</span><span class="s1">Text</span><span class="s2">(</span><span class="s3">&quot;Fecha&quot;</span><span class="s2">)),</span>
+        <span class="s2">]</span>
+    <span class="s2">)</span>
+
+
+    <span class="s1">columna_datos </span><span class="s2">= </span><span class="s1">ft</span><span class="s2">.</span><span class="s1">Column</span><span class="s2">(</span>
+        <span class="s1">controls</span><span class="s2">=[</span>
+            <span class="s1">ft</span><span class="s2">.</span><span class="s1">Text</span><span class="s2">(</span><span class="s3">&quot;CONSULTAS&quot;</span><span class="s2">, </span><span class="s1">size</span><span class="s2">=</span><span class="s5">40</span><span class="s2">),</span>
+            <span class="s1">nombre_tf</span><span class="s2">,</span>
+            <span class="s1">buscar_btn</span><span class="s2">,</span>
+            <span class="s1">tabla</span>
+        <span class="s2">]</span>
+    <span class="s2">)</span>
+
+
+    <span class="s1">page</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">columna_datos</span><span class="s2">)</span>
+    <span class="s1">consultar_arboles</span><span class="s2">()</span>
+
+
+<span class="s0">if </span><span class="s1">__name__ </span><span class="s2">== </span><span class="s3">'__main__'</span><span class="s2">:</span>
+    <span class="s1">ft</span><span class="s2">.</span><span class="s1">app</span><span class="s2">(</span><span class="s1">target</span><span class="s2">=</span><span class="s1">main</span><span class="s2">)</span>
+</pre>
+</body>
+</html>

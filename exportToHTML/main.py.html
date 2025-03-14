@@ -1,0 +1,77 @@
+<html>
+<head>
+<title>main.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+main.py</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">datetime</span>
+
+<span class="s0">import </span><span class="s1">ddbb</span>
+<span class="s0">import </span><span class="s1">juegosddbb</span>
+<span class="s0">import </span><span class="s1">flet </span><span class="s0">as </span><span class="s1">ft</span>
+
+<span class="s0">def </span><span class="s1">main</span><span class="s2">(</span><span class="s1">page </span><span class="s2">: </span><span class="s1">ft</span><span class="s2">.</span><span class="s1">Page</span><span class="s2">):</span>
+    <span class="s1">page</span><span class="s2">.</span><span class="s1">title </span><span class="s2">= </span><span class="s3">&quot;CONTROL JARDÍN&quot;</span>
+
+    <span class="s0">def </span><span class="s1">abrir_selector</span><span class="s2">(</span><span class="s1">e</span><span class="s2">):</span>
+        <span class="s1">date_picker</span><span class="s2">.</span><span class="s1">open </span><span class="s2">= </span><span class="s0">True</span>
+        <span class="s1">page</span><span class="s2">.</span><span class="s1">update</span><span class="s2">()</span>
+
+    <span class="s0">def </span><span class="s1">seleccionar_fecha</span><span class="s2">(</span><span class="s1">e</span><span class="s2">):</span>
+        <span class="s1">fecha_txt</span><span class="s2">.</span><span class="s1">value </span><span class="s2">= </span><span class="s3">f'</span><span class="s0">{</span><span class="s1">date_picker</span><span class="s2">.</span><span class="s1">value</span><span class="s2">.</span><span class="s1">day</span><span class="s0">}</span><span class="s3">/</span><span class="s0">{</span><span class="s1">date_picker</span><span class="s2">.</span><span class="s1">value</span><span class="s2">.</span><span class="s1">month</span><span class="s0">}</span><span class="s3">/</span><span class="s0">{</span><span class="s1">date_picker</span><span class="s2">.</span><span class="s1">value</span><span class="s2">.</span><span class="s1">year</span><span class="s0">}</span><span class="s3">'</span>
+        <span class="s1">page</span><span class="s2">.</span><span class="s1">update</span><span class="s2">()</span>
+
+    <span class="s0">def </span><span class="s1">get_tipos</span><span class="s2">():</span>
+        <span class="s1">lista_tipos </span><span class="s2">= []</span>
+        <span class="s1">lista_tipos</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s1">ft</span><span class="s2">.</span><span class="s1">dropdown</span><span class="s2">.</span><span class="s1">Option</span><span class="s2">(</span><span class="s1">text</span><span class="s2">=</span><span class="s3">&quot;Perenne&quot;</span><span class="s2">, </span><span class="s1">key</span><span class="s2">=</span><span class="s3">&quot;Perenne&quot;</span><span class="s2">))</span>
+        <span class="s1">lista_tipos</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s1">ft</span><span class="s2">.</span><span class="s1">dropdown</span><span class="s2">.</span><span class="s1">Option</span><span class="s2">(</span><span class="s1">text</span><span class="s2">=</span><span class="s3">&quot;Caduca&quot;</span><span class="s2">, </span><span class="s1">key</span><span class="s2">=</span><span class="s3">&quot;Caduca&quot;</span><span class="s2">))</span>
+        <span class="s0">return </span><span class="s1">lista_tipos</span>
+
+    <span class="s0">def </span><span class="s1">crear_arbol</span><span class="s2">(</span><span class="s1">e</span><span class="s2">):</span>
+        <span class="s1">nombre </span><span class="s2">= </span><span class="s1">nombre_tf</span><span class="s2">.</span><span class="s1">value</span>
+        <span class="s1">tipo </span><span class="s2">= </span><span class="s1">tipos_drop</span><span class="s2">.</span><span class="s1">value</span>
+        <span class="s1">altura </span><span class="s2">= </span><span class="s1">altura_tf</span><span class="s2">.</span><span class="s1">value</span>
+        <span class="s1">fecha </span><span class="s2">= </span><span class="s1">date_picker</span><span class="s2">.</span><span class="s1">value</span>
+        <span class="s1">ddbb</span><span class="s2">.</span><span class="s1">insertar_arbol</span><span class="s2">(</span><span class="s1">nombre</span><span class="s2">, </span><span class="s1">tipo</span><span class="s2">, </span><span class="s1">altura</span><span class="s2">, </span><span class="s1">fecha</span><span class="s2">)</span>
+
+    <span class="s4">#OBJETOS</span>
+    <span class="s1">nombre_tf </span><span class="s2">= </span><span class="s1">ft</span><span class="s2">.</span><span class="s1">TextField</span><span class="s2">(</span><span class="s1">label</span><span class="s2">=</span><span class="s3">&quot;Nombre&quot;</span><span class="s2">, </span><span class="s1">width</span><span class="s2">=</span><span class="s5">300</span><span class="s2">)</span>
+    <span class="s1">tipos_drop </span><span class="s2">= </span><span class="s1">ft</span><span class="s2">.</span><span class="s1">Dropdown</span><span class="s2">(</span><span class="s1">label</span><span class="s2">=</span><span class="s3">&quot;Tipo&quot;</span><span class="s2">, </span><span class="s1">width</span><span class="s2">=</span><span class="s5">300</span><span class="s2">, </span><span class="s1">options</span><span class="s2">=</span><span class="s1">get_tipos</span><span class="s2">())</span>
+    <span class="s1">altura_tf </span><span class="s2">= </span><span class="s1">ft</span><span class="s2">.</span><span class="s1">TextField</span><span class="s2">(</span><span class="s1">label</span><span class="s2">=</span><span class="s3">&quot;Altura&quot;</span><span class="s2">, </span><span class="s1">width</span><span class="s2">=</span><span class="s5">300</span><span class="s2">)</span>
+
+    <span class="s1">date_picker </span><span class="s2">= </span><span class="s1">ft</span><span class="s2">.</span><span class="s1">DatePicker</span><span class="s2">(</span><span class="s1">on_change</span><span class="s2">=</span><span class="s1">seleccionar_fecha</span><span class="s2">, </span><span class="s1">value</span><span class="s2">=</span><span class="s1">datetime</span><span class="s2">.</span><span class="s1">datetime</span><span class="s2">.</span><span class="s1">now</span><span class="s2">())</span>
+    <span class="s1">fecha_txt </span><span class="s2">= </span><span class="s1">ft</span><span class="s2">.</span><span class="s1">Text</span><span class="s2">(</span><span class="s3">f'</span><span class="s0">{</span><span class="s1">date_picker</span><span class="s2">.</span><span class="s1">value</span><span class="s2">.</span><span class="s1">day</span><span class="s0">}</span><span class="s3">/</span><span class="s0">{</span><span class="s1">date_picker</span><span class="s2">.</span><span class="s1">value</span><span class="s2">.</span><span class="s1">month</span><span class="s0">}</span><span class="s3">/</span><span class="s0">{</span><span class="s1">date_picker</span><span class="s2">.</span><span class="s1">value</span><span class="s2">.</span><span class="s1">year</span><span class="s0">}</span><span class="s3">'</span><span class="s2">)</span>
+    <span class="s1">columna_datos </span><span class="s2">= </span><span class="s1">ft</span><span class="s2">.</span><span class="s1">Column</span><span class="s2">(</span>
+        <span class="s1">controls</span><span class="s2">=[ </span><span class="s1">ft</span><span class="s2">.</span><span class="s1">Text</span><span class="s2">(</span><span class="s3">&quot;ÁRBOLES&quot;</span><span class="s2">, </span><span class="s1">size</span><span class="s2">=</span><span class="s5">40</span><span class="s2">),</span>
+                   <span class="s1">nombre_tf</span><span class="s2">,</span>
+                   <span class="s1">tipos_drop</span><span class="s2">,</span>
+                   <span class="s1">altura_tf</span><span class="s2">,</span>
+                   <span class="s1">fecha_txt</span><span class="s2">,</span>
+                   <span class="s1">ft</span><span class="s2">.</span><span class="s1">FilledButton</span><span class="s2">(</span><span class="s3">&quot;SELECCIONAR FECHA&quot;</span><span class="s2">, </span><span class="s1">on_click</span><span class="s2">=</span><span class="s1">abrir_selector</span><span class="s2">),</span>
+                   <span class="s1">ft</span><span class="s2">.</span><span class="s1">FilledButton</span><span class="s2">(</span><span class="s3">&quot;CREAR ÁRBOL&quot;</span><span class="s2">, </span><span class="s1">on_click</span><span class="s2">=</span><span class="s1">crear_arbol</span><span class="s2">)</span>
+                   <span class="s2">],</span>
+    <span class="s2">)</span>
+
+    <span class="s1">page</span><span class="s2">.</span><span class="s1">overlay</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s1">date_picker</span><span class="s2">)</span>
+    <span class="s1">page</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">columna_datos</span><span class="s2">)</span>
+
+<span class="s0">if </span><span class="s1">__name__ </span><span class="s2">== </span><span class="s3">'__main__'</span><span class="s2">:</span>
+    <span class="s1">ft</span><span class="s2">.</span><span class="s1">app</span><span class="s2">(</span><span class="s1">target</span><span class="s2">=</span><span class="s1">main</span><span class="s2">)</span>
+    <span class="s4"># juegosddbb.insertar_juegos('ug', 'Rayman fantasy', 'niveles', 70)</span>
+    <span class="s4"># ddbb.insertar_arbol(&quot;Arbol asesino&quot;, &quot;Caduca&quot;, 5000000, &quot;2025-03-07&quot;)</span>
+</pre>
+</body>
+</html>

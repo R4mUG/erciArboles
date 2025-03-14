@@ -1,0 +1,113 @@
+<html>
+<head>
+<title>juegosddbb.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+.s5 { color: #5f826b; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+juegosddbb.py</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">psycopg2</span>
+
+<span class="s0">def </span><span class="s1">connect</span><span class="s2">():</span>
+    <span class="s3"># Conectar a PostgreSQL</span>
+    <span class="s1">conn </span><span class="s2">= </span><span class="s1">psycopg2</span><span class="s2">.</span><span class="s1">connect</span><span class="s2">(</span>
+        <span class="s1">dbname</span><span class="s2">=</span><span class="s4">&quot;friki&quot;</span><span class="s2">,</span>
+        <span class="s1">user</span><span class="s2">=</span><span class="s4">&quot;postgres&quot;</span><span class="s2">,</span>
+        <span class="s1">password</span><span class="s2">=</span><span class="s4">&quot;1234&quot;</span><span class="s2">,</span>
+        <span class="s1">host</span><span class="s2">=</span><span class="s4">&quot;192.168.10.80&quot;</span><span class="s2">,</span>
+        <span class="s1">port</span><span class="s2">=</span><span class="s4">&quot;5433&quot;</span>
+    <span class="s2">)</span>
+    <span class="s0">return </span><span class="s1">conn</span>
+
+
+<span class="s0">def </span><span class="s1">consultar_juegos_por_empresa</span><span class="s2">(</span><span class="s1">empresa</span><span class="s2">):</span>
+    <span class="s1">conn </span><span class="s2">= </span><span class="s1">connect</span><span class="s2">()</span>
+    <span class="s1">juegos </span><span class="s2">= []</span>
+    <span class="s0">try</span><span class="s2">:</span>
+        <span class="s1">cursor </span><span class="s2">= </span><span class="s1">conn</span><span class="s2">.</span><span class="s1">cursor</span><span class="s2">()</span>
+        <span class="s1">query </span><span class="s2">= </span><span class="s4">&quot;&quot;&quot; 
+                SELECT * 
+                FROM juegos 
+                WHERE lower(empresa) = lower(%s); 
+                &quot;&quot;&quot;</span>
+        <span class="s1">cursor</span><span class="s2">.</span><span class="s1">execute</span><span class="s2">(</span><span class="s1">query</span><span class="s2">, (</span><span class="s1">empresa</span><span class="s2">,))</span>
+        <span class="s1">juegos </span><span class="s2">= </span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">fetchall</span><span class="s2">()</span>
+
+    <span class="s0">except </span><span class="s1">Exception </span><span class="s0">as </span><span class="s1">e</span><span class="s2">:</span>
+        <span class="s1">print</span><span class="s2">(</span><span class="s4">f'Error al obtener los juegos </span><span class="s0">{</span><span class="s1">e</span><span class="s0">}</span><span class="s4">'</span><span class="s2">)</span>
+
+    <span class="s0">finally</span><span class="s2">:</span>
+        <span class="s0">if </span><span class="s1">conn</span><span class="s2">:</span>
+            <span class="s1">cursor</span><span class="s2">.</span><span class="s1">close</span><span class="s2">()</span>
+            <span class="s1">conn</span><span class="s2">.</span><span class="s1">close</span><span class="s2">()</span>
+    <span class="s1">print</span><span class="s2">(</span><span class="s1">juegos</span><span class="s2">)</span>
+    <span class="s0">return </span><span class="s1">juegos</span>
+
+
+<span class="s0">def </span><span class="s1">consultar_juegos</span><span class="s2">():</span>
+    <span class="s1">conn </span><span class="s2">= </span><span class="s1">connect</span><span class="s2">()</span>
+    <span class="s1">juegos </span><span class="s2">= []</span>
+    <span class="s0">try</span><span class="s2">:</span>
+        <span class="s1">cursor </span><span class="s2">= </span><span class="s1">conn</span><span class="s2">.</span><span class="s1">cursor</span><span class="s2">()</span>
+        <span class="s1">query </span><span class="s2">= </span><span class="s4">&quot;&quot;&quot; 
+                SELECT *  
+                FROM juegos; 
+                &quot;&quot;&quot;</span>
+        <span class="s1">cursor</span><span class="s2">.</span><span class="s1">execute</span><span class="s2">(</span><span class="s1">query</span><span class="s2">)</span>
+        <span class="s1">juegos </span><span class="s2">= </span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">fetchall</span><span class="s2">()</span>
+    <span class="s0">except </span><span class="s1">Exception </span><span class="s0">as </span><span class="s1">e</span><span class="s2">:</span>
+        <span class="s1">print</span><span class="s2">(</span><span class="s4">f'Error al obtener los juegos </span><span class="s0">{</span><span class="s1">e</span><span class="s0">}</span><span class="s4">'</span><span class="s2">)</span>
+    <span class="s0">finally</span><span class="s2">:</span>
+        <span class="s0">if </span><span class="s1">conn</span><span class="s2">:</span>
+            <span class="s1">cursor</span><span class="s2">.</span><span class="s1">close</span><span class="s2">()</span>
+            <span class="s1">conn</span><span class="s2">.</span><span class="s1">close</span><span class="s2">()</span>
+    <span class="s1">print </span><span class="s2">(</span><span class="s1">juegos</span><span class="s2">)</span>
+    <span class="s0">return </span><span class="s1">juegos</span>
+
+<span class="s0">def </span><span class="s1">insertar_juegos</span><span class="s2">(</span><span class="s1">empresa</span><span class="s2">, </span><span class="s1">nombre</span><span class="s2">, </span><span class="s1">tipo</span><span class="s2">, </span><span class="s1">precio</span><span class="s2">):</span>
+    <span class="s5">&quot;&quot;&quot; 
+    Inserta un nuevo árbol en la base de datos. 
+ 
+    Parámetros: 
+    - nombre (str): Nombre del árbol (ejemplo: &quot;Pino&quot;). 
+    - tipo (str): Puede ser &quot;Perenne&quot; o &quot;Caduca&quot;. 
+    - altura_promedio (int): Altura promedio del árbol en metros. 
+    - fecha_plantacion (str): Fecha en formato 'YYYY-MM-DD' de la plantación. 
+    &quot;&quot;&quot;</span>
+    <span class="s1">conn </span><span class="s2">= </span><span class="s1">connect</span><span class="s2">()  </span><span class="s3"># Conectar a la base de datos</span>
+    <span class="s0">try</span><span class="s2">:</span>
+        <span class="s1">cursor </span><span class="s2">= </span><span class="s1">conn</span><span class="s2">.</span><span class="s1">cursor</span><span class="s2">()  </span><span class="s3"># Crear un cursor para ejecutar consultas SQL</span>
+
+        <span class="s3"># Consulta SQL para insertar un nuevo árbol en la tabla 'Arboles'</span>
+        <span class="s1">query </span><span class="s2">= </span><span class="s4">&quot;&quot;&quot; 
+        INSERT INTO Juegos (empresa, nombre, tipo, precio) 
+        VALUES (%s, %s, %s, %s) 
+        &quot;&quot;&quot;</span>
+
+        <span class="s3"># Ejecutar la consulta pasando los valores como parámetros</span>
+        <span class="s1">cursor</span><span class="s2">.</span><span class="s1">execute</span><span class="s2">(</span><span class="s1">query</span><span class="s2">, (</span><span class="s1">empresa</span><span class="s2">, </span><span class="s1">nombre</span><span class="s2">, </span><span class="s1">tipo</span><span class="s2">, </span><span class="s1">precio</span><span class="s2">))</span>
+
+        <span class="s3"># Confirmar la transacción</span>
+        <span class="s1">conn</span><span class="s2">.</span><span class="s1">commit</span><span class="s2">()</span>
+        <span class="s1">print</span><span class="s2">(</span><span class="s4">&quot;Juego registrado correctamente.&quot;</span><span class="s2">)</span>
+
+    <span class="s0">except </span><span class="s1">psycopg2</span><span class="s2">.</span><span class="s1">Error </span><span class="s0">as </span><span class="s1">e</span><span class="s2">:</span>
+        <span class="s1">print</span><span class="s2">(</span><span class="s4">f&quot;Error en la base de datos: </span><span class="s0">{</span><span class="s1">e</span><span class="s0">}</span><span class="s4">&quot;</span><span class="s2">)</span>
+
+    <span class="s0">finally</span><span class="s2">:</span>
+        <span class="s0">if </span><span class="s1">conn</span><span class="s2">:</span>
+            <span class="s1">cursor</span><span class="s2">.</span><span class="s1">close</span><span class="s2">()  </span><span class="s3"># Cerrar el cursor</span>
+            <span class="s1">conn</span><span class="s2">.</span><span class="s1">close</span><span class="s2">()  </span><span class="s3"># Cerrar la conexión a la base de datos</span></pre>
+</body>
+</html>

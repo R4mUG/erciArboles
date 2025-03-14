@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>dataSources.local.xml</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #d5b778;}
+.s1 { color: #bcbec4;}
+.s2 { color: #6aab73;}
+.s3 { color: #bcbec4;}
+.s4 { color: #56a8f5;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+dataSources.local.xml</font>
+</center></td></tr></table>
+<pre><span class="s0">&lt;?</span><span class="s1">xml version</span><span class="s2">=&quot;1.0&quot; </span><span class="s1">encoding</span><span class="s2">=&quot;UTF-8&quot;</span><span class="s0">?&gt;</span>
+<span class="s0">&lt;project </span><span class="s1">version</span><span class="s2">=&quot;4&quot;</span><span class="s0">&gt;</span>
+  <span class="s0">&lt;component </span><span class="s1">name</span><span class="s2">=&quot;dataSourceStorageLocal&quot; </span><span class="s1">created-in</span><span class="s2">=&quot;PY-243.23654.177&quot;</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;data-source </span><span class="s1">name</span><span class="s2">=&quot;postgres@192.168.10.80&quot; </span><span class="s1">uuid</span><span class="s2">=&quot;940cc284-c85f-4bd6-b978-7dc2cb0ffbae&quot;</span><span class="s0">&gt;</span>
+      <span class="s0">&lt;database-info </span><span class="s1">product</span><span class="s2">=&quot;PostgreSQL&quot; </span><span class="s1">version</span><span class="s2">=&quot;14.17 (Ubuntu 14.17-0ubuntu0.22.04.1)&quot; </span><span class="s1">jdbc-version</span><span class="s2">=&quot;4.2&quot; </span><span class="s1">driver-name</span><span class="s2">=&quot;PostgreSQL JDBC Driver&quot; </span><span class="s1">driver-version</span><span class="s2">=&quot;42.7.3&quot; </span><span class="s1">dbms</span><span class="s2">=&quot;POSTGRES&quot; </span><span class="s1">exact-version</span><span class="s2">=&quot;14.17&quot; </span><span class="s1">exact-driver-version</span><span class="s2">=&quot;42.7&quot;</span><span class="s0">&gt;</span>
+        <span class="s0">&lt;identifier-quote-string&gt;</span><span class="s4">&amp;quot;</span><span class="s0">&lt;/identifier-quote-string&gt;</span>
+      <span class="s0">&lt;/database-info&gt;</span>
+      <span class="s0">&lt;case-sensitivity </span><span class="s1">plain-identifiers</span><span class="s2">=&quot;lower&quot; </span><span class="s1">quoted-identifiers</span><span class="s2">=&quot;exact&quot; </span><span class="s0">/&gt;</span>
+      <span class="s0">&lt;secret-storage&gt;</span><span class="s3">master_key</span><span class="s0">&lt;/secret-storage&gt;</span>
+      <span class="s0">&lt;user-name&gt;</span><span class="s3">postgres</span><span class="s0">&lt;/user-name&gt;</span>
+      <span class="s0">&lt;schema-mapping&gt;</span>
+        <span class="s0">&lt;introspection-scope&gt;</span>
+          <span class="s0">&lt;node </span><span class="s1">kind</span><span class="s2">=&quot;database&quot;</span><span class="s0">&gt;</span>
+            <span class="s0">&lt;name </span><span class="s1">qname</span><span class="s2">=&quot;friki&quot; </span><span class="s0">/&gt;</span>
+            <span class="s0">&lt;name </span><span class="s1">qname</span><span class="s2">=&quot;jardin&quot; </span><span class="s0">/&gt;</span>
+            <span class="s0">&lt;node </span><span class="s1">kind</span><span class="s2">=&quot;schema&quot; </span><span class="s1">qname</span><span class="s2">=&quot;public&quot; </span><span class="s0">/&gt;</span>
+          <span class="s0">&lt;/node&gt;</span>
+        <span class="s0">&lt;/introspection-scope&gt;</span>
+      <span class="s0">&lt;/schema-mapping&gt;</span>
+    <span class="s0">&lt;/data-source&gt;</span>
+  <span class="s0">&lt;/component&gt;</span>
+<span class="s0">&lt;/project&gt;</span></pre>
+</body>
+</html>
