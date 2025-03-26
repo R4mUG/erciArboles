@@ -36,7 +36,7 @@ def main(page: ft.Page):
     buscar_btn = ft.ElevatedButton("Buscar", width=300, on_click=buscar_arboles)
     volver_btn = ft.ElevatedButton(text="Volver", on_click=volver)
 
-    tabla = ft.DataTable(bgcolor="yellow",
+    tabla = ft.DataTable(bgcolor="red",
         columns=[
             ft.DataColumn(ft.Text("ID")),
             ft.DataColumn(ft.Text("Nombre")),
